@@ -1,21 +1,26 @@
 var writefile = {
-  onLoad: function() {
-    // initialization code
-    this.initialized = true;
-    this.strings = document.getElementById("writefile-strings");
-  },
+  onWriteFile: function(e) {
+    // TODO define file, data as components
+    var file, data;
+    // file is nsIFile, data is a string
+    var foStream = Components.classes["@mozilla.org/network/file-output-stream;1"].
+                   createInstance(Components.interfaces.nsIFileOutputStream);
 
-  onMenuItemCommand: function(e) {
-    var promptService = Components.classes["@mozilla.org/embedcomp/prompt-service;1"]
-                                  .getService(Components.interfaces.nsIPromptService);
-    promptService.alert(window, this.strings.getString("helloMessageTitle"),
-                                this.strings.getString("helloMessage"));
-  },
+    // use 0x02 | 0x10 to open file for appending.
+    foStream.init(file, 0x02 | 0x08 | 0x20, 0666, 0); 
+    // write, create, truncate
+    // In a c file operation, we have no need to set file mode with or operation,
+    // directly using "r" or "w" usually.
 
-  onToolbarButtonCommand: function(e) {
-    // just reuse the function above.  you can change this, obviously!
-    writefile.onMenuItemCommand(e);
+    // if you are sure there will never ever be any non-ascii text in data you can 
+    // also call foStream.writeData directly
+    var converter = Components.classes["@mozilla.org/intl/converter-output-stream;1"].
+                    createInstance(Components.interfaces.nsIConverterOutputStream);
+    converter.init(foStream, "UTF-8", 0, 0);
+    converter.writeString(data);
+    converter.close(); // this closes foStream
+    alert("writing file");
   }
 };
 
-window.addEventListener("load", function () { writefile.onLoad(); }, false);
+window.addEventListener("WriteFile", function(e) { writefile.onWriteFile(e); }, false, true);
