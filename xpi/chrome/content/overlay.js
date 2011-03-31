@@ -5,18 +5,20 @@ var writefile = {
   },
 
   onWriteFile: function(e) {
-    alert("starting onWriteFile");
     // TODO define file, data as components
     var file = Components.classes["@mozilla.org/file/local;1"].  
-               createInstance(Components.interfaces.nsILocalFile); 
-    file.initWithPath(e.target.getAttribute("filename"));
+               createInstance(Components.interfaces.nsILocalFile),
+        split_file = e.target.getAttribute("filename").split("\\"),
+        file_path = split_file.join("\\\\");
+    alert("file name: " + file_path);
+    file.initWithPath(file_path);
     var data = "testing",
         // file is nsIFile, data is a string
         foStream = Components.classes["@mozilla.org/network/file-output-stream;1"].
                    createInstance(Components.interfaces.nsIFileOutputStream);
 
     // use 0x02 | 0x10 to open file for appending.
-    foStream.init(file, 0x02 | 0x08 | 0x20, 0666, 0); 
+    foStream.init(file, 0x02 | 0x08, 0666, 0); 
     // write, create, truncate
     // In a c file operation, we have no need to set file mode with or operation,
     // directly using "r" or "w" usually.
@@ -28,7 +30,6 @@ var writefile = {
     converter.init(foStream, "UTF-8", 0, 0);
     converter.writeString(data);
     converter.close(); // this closes foStream
-    alert("writing file");
   }
 };
 
