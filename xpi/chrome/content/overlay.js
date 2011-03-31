@@ -1,9 +1,18 @@
 var writefile = {
+
+  onLoad: function() {
+    this.initialized = true;
+  },
+
   onWriteFile: function(e) {
+    alert("starting onWriteFile");
     // TODO define file, data as components
-    var file, data;
-    // file is nsIFile, data is a string
-    var foStream = Components.classes["@mozilla.org/network/file-output-stream;1"].
+    var file = Components.classes["@mozilla.org/file/local;1"].  
+               createInstance(Components.interfaces.nsILocalFile); 
+    file.initWithPath(e.target.getAttribute("filename"));
+    var data = "testing",
+        // file is nsIFile, data is a string
+        foStream = Components.classes["@mozilla.org/network/file-output-stream;1"].
                    createInstance(Components.interfaces.nsIFileOutputStream);
 
     // use 0x02 | 0x10 to open file for appending.
@@ -23,4 +32,5 @@ var writefile = {
   }
 };
 
+window.addEventListener("load", function() { writefile.onLoad(); }, false);
 window.addEventListener("WriteFile", function(e) { writefile.onWriteFile(e); }, false, true);
