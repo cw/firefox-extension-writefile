@@ -1,0 +1,8 @@
+<!ENTITY writefile.label "Your localized menuitem">
+<!ENTITY writefileContext.label "Your Menuitem">
+<!ENTITY writefileContext.accesskey "Y">
+<!ENTITY writefileToolbarButton.label "Your Toolbar Button">
+<!ENTITY writefileToolbarButton.tooltip "This is your toolbar button!">
+<!ENTITY writefileSidebar.label "Your Sidebar">
+<!ENTITY writefileToolbar.name  "example">
+<!ENTITY writefileToolbar.label "This is an example toolbar. You can hide it under View &gt; toolbars &gt; &writefileToolbar.name;">

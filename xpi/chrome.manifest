@@ -1,0 +1,6 @@
+content   writefile                 chrome/content/
+skin      writefile   classic/1.0   chrome/skin/
+locale    writefile   en-US         chrome/locale/en-US/
+
+
+overlay   chrome://browser/content/browser.xul   chrome://writefile/content/ff-overlay.xul
