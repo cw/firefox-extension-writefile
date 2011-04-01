@@ -11,3 +11,4 @@ This [Firefox extension](https://developer.mozilla.org/en/extensions) listens fo
 * [XPCOM File I/O](https://developer.mozilla.org/en/Code_snippets/File_I%2f%2fO)
 * [XPCOM nsIFile](https://developer.mozilla.org/en/XPCOM_Interface_Reference/nsIFile)
 * [XPCOM nsILocalFile](https://developer.mozilla.org/en/XPCOM_Interface_Reference/nsILocalFile)
+* [XPCOM PR_Open](https://developer.mozilla.org/en/PR_Open) - includes file open flags definitions
