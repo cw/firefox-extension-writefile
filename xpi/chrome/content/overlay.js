@@ -7,14 +7,13 @@ var writefile = {
   onWriteFile: function(e) {
     var file = Components.classes["@mozilla.org/file/local;1"].  
                createInstance(Components.interfaces.nsILocalFile),
-        file_path = e.target.getAttribute("filename");
-    file.initWithPath(file_path);
-    if (!file.exists()) { file.create(0, 0666) };
-    // TODO get `data` from a CDATA element
-    var data = "testing\none\ntwo\nthree",
-        // file is nsIFile, data is a string
+        file_path = e.target.getAttribute("filename"),
+        data = e.target.innerHTML,
         foStream = Components.classes["@mozilla.org/network/file-output-stream;1"].
                    createInstance(Components.interfaces.nsIFileOutputStream);
+
+    file.initWithPath(file_path);
+    if (!file.exists()) { file.create(0, 0666) };
 
     // use 0x02 | 0x10 to open file for appending.
     foStream.init(file, 0x02 | 0x08, 0666, 0); 
