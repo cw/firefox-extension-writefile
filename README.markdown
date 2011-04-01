@@ -1,6 +1,8 @@
 # Writefile #
 
-This [Firefox extension](https://developer.mozilla.org/en/extensions) writes the given *text string* to the given path. For system security, the path must not exist or the command will fail.
+This [Firefox extension](https://developer.mozilla.org/en/extensions) listens for a "WriteFile" event from an element in a web page and writes the contents of that element to the path given in the "filename" attribute of the same element.
+
+
 
 ## Extension resources ##
 
