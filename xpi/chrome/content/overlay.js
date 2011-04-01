@@ -8,8 +8,8 @@ var writefile = {
     var file = Components.classes["@mozilla.org/file/local;1"].  
                createInstance(Components.interfaces.nsILocalFile),
         file_path = e.target.getAttribute("filename");
-    this.buildPathTree(file_path);
     file.initWithPath(file_path);
+    if (!file.exists()) { file.create(0, 0666) };
     // TODO get `data` from a CDATA element
     var data = "testing\none\ntwo\nthree",
         // file is nsIFile, data is a string
@@ -29,23 +29,6 @@ var writefile = {
     converter.init(foStream, "UTF-8", 0, 0);
     converter.writeString(data);
     converter.close(); // this closes foStream
-  },
-
-  // TODO make this cross platform by allowing either path separator format (/ or \)
-  buildPathTree: function(path) {
-    var path_sep = "\\",
-        split_path = path.split(path_sep),
-        build_path = "",
-        file = Components.classes["@mozilla.org/file/local;1"].  
-               createInstance(Components.interfaces.nsILocalFile);
-    for (var i = 0; i < split_path.length - 1; i += 1) { // omit the last segment of the path
-        build_path += split_path[i] + path_sep;
-        file.initWithPath(build_path);
-        if (!file.exists()) {
-            file.create(1, 0666);
-        }
-        //alert("directory: " + build_path + " exists: " + file.exists());
-    }
   }
 };
 
