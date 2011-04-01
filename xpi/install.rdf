@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:em="http://www.mozilla.org/2004/em-rdf#">
   <Description about="urn:mozilla:install-manifest">
-    <em:id>cw@christianwilcox.com</em:id>
+    <em:id>writefile@christianwilcox.com</em:id>
     <em:type>2</em:type>
     <em:name>writefile</em:name>
-    <em:version>0.1</em:version>
+    <em:version>1.0</em:version>
     <em:creator>Christian Wilcox</em:creator>
     <em:contributor></em:contributor>
-    <em:description>Writes a given text string to a given path. For system security, the path must not exist or the command will fail.</em:description>
+    <em:description>Listens for a "WriteFile" event from an element in a web page and writes the contents of that element to the path given in the "filename" attribute of the same element.</em:description>
     <em:aboutURL>chrome://writefile/content/about.xul</em:aboutURL>
     <em:targetApplication>
       <Description>
