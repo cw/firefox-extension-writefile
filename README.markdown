@@ -8,3 +8,4 @@ This [Firefox extension](https://developer.mozilla.org/en/extensions) writes the
 * [Interaction between priviledged and non-priviledged pages](https://developer.mozilla.org/en/Code_snippets/Interaction_between_privileged_and_non-privileged_pages)
 * [XPCOM File I/O](https://developer.mozilla.org/en/Code_snippets/File_I%2f%2fO)
 * [XPCOM nsIFile](https://developer.mozilla.org/en/XPCOM_Interface_Reference/nsIFile)
+* [XPCOM nsILocalFile](https://developer.mozilla.org/en/XPCOM_Interface_Reference/nsILocalFile)
