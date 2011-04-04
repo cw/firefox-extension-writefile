@@ -16,7 +16,12 @@ var writefile = {
         base_path = split_path.join(path_sep),
         data = e.target.innerHTML,
         foStream = Components.classes["@mozilla.org/network/file-output-stream;1"].
-                   createInstance(Components.interfaces.nsIFileOutputStream);
+                   createInstance(Components.interfaces.nsIFileOutputStream),
+        output_encoding = e.target.getAttribute("encoding");
+
+    if (!output_encoding) {
+        output_encoding = "UTF-8"; // default
+    }
 
     base.initWithPath(base_path);
     if (!base.exists()) { base.create(1, 0666) };
@@ -35,7 +40,7 @@ var writefile = {
         // also call foStream.writeData directly
         var converter = Components.classes["@mozilla.org/intl/converter-output-stream;1"].
                         createInstance(Components.interfaces.nsIConverterOutputStream);
-        converter.init(foStream, "UTF-8", 0, 0);
+        converter.init(foStream, output_encoding, 0, 0);
         converter.writeString(data);
         converter.close(); // this closes foStream
     };
