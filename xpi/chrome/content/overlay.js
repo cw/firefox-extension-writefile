@@ -9,12 +9,15 @@ var writefile = {
                createInstance(Components.interfaces.nsILocalFile),
         file = Components.classes["@mozilla.org/file/local;1"].  
                createInstance(Components.interfaces.nsILocalFile),
+        converter = Components.classes["@mozilla.org/intl/converter-output-stream;1"].
+               createInstance(Components.interfaces.nsIConverterOutputStream),
         file_path = e.target.getAttribute("filename"),
         path_sep = (file_path.search(/\\/) !== -1) ? "\\" : "/",
         split_path = file_path.split(path_sep),
         file_name = split_path.pop(-1),
         base_path = split_path.join(path_sep),
         data = e.target.innerHTML,
+        split_data = [],
         foStream = Components.classes["@mozilla.org/network/file-output-stream;1"].
                    createInstance(Components.interfaces.nsIFileOutputStream),
         output_encoding = e.target.getAttribute("encoding"),
@@ -23,34 +26,33 @@ var writefile = {
         evt = doc.createEvent("Events"),
         response = "Generic response"; // default response
 
-    if (!output_encoding) {
-        output_encoding = "UTF-8"; // default
-    }
+    // Set default output encoding to UTF-8 if it's not set as an attribute on the calling element
+    if (!output_encoding) { output_encoding = "UTF-8"; }
 
-    base.initWithPath(base_path);
+    // Create base path if it doesn't exist
+    base.initWithPath(base_path); 
     if (!base.exists()) { base.create(1, 0666) };
 
+    // Only create the file if it doesn't exist
     file.initWithPath(file_path);
-    if (!file.exists()) { // only create the file if it doesn't exist
+    if (!file.exists()) { 
         file.create(0, 0666);
-
-        // use 0x02 | 0x10 to open file for appending.
-        foStream.init(file, 0x02 | 0x08, 0666, 0); 
-        // write, create, truncate
-
-        // if you are sure there will never ever be any non-ascii text in data you can 
-        // also call foStream.writeData directly
-        var converter = Components.classes["@mozilla.org/intl/converter-output-stream;1"].
-                        createInstance(Components.interfaces.nsIConverterOutputStream);
-        converter.init(foStream, output_encoding, 0, 0);
+        // 0x02 opens the file for writing only
+        foStream.init(file, 0x02, 0666, 0); 
         // TODO if output_encoding == ascii, split data by "\n" then join by "\r\n"
+        converter.init(foStream, output_encoding, 0, 0);
+        if (output_encoding === "ascii") {
+            split_data = data.split("\n");
+            data = split_data.join("\r\n");
+        }
         converter.writeString(data);
-        converter.close(); // this closes foStream
+        converter.close(); 
         response = "Wrote file " + file_path;
-    } else { // File exists
+    } else { 
         response = file_path + " exists! Unable to write to an existing file.";
     };
 
+    // Trigger `writefile_response` event with `response` value as element attribute
     elem.setAttribute("response", response);
     evt.initEvent("writefile_response", true, false);
     elem.dispatchEvent(evt);
