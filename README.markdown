@@ -1,6 +1,6 @@
 # Writefile #
 
-This [Firefox extension](https://developer.mozilla.org/en/extensions) listens for a "WriteFile" event from an element in a web page and writes the contents of that element to the path given in the "filename" attribute of the same element.
+This [Firefox extension](https://developer.mozilla.org/en/extensions) listens for a "WriteFile" event from an element in a web page and writes the contents of that element to the path given in the "filename" attribute of the same element. In the interest of system security, this extension will not overwrite existing files.
 
 
 
