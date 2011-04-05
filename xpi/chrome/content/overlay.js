@@ -17,7 +17,11 @@ var writefile = {
         data = e.target.innerHTML,
         foStream = Components.classes["@mozilla.org/network/file-output-stream;1"].
                    createInstance(Components.interfaces.nsIFileOutputStream),
-        output_encoding = e.target.getAttribute("encoding");
+        output_encoding = e.target.getAttribute("encoding"),
+        doc = content.document,
+        elem = doc.getElementById("WriteFileElem"),
+        evt = doc.createEvent("Events"),
+        response = "Generic response"; // default response
 
     if (!output_encoding) {
         output_encoding = "UTF-8"; // default
@@ -33,18 +37,27 @@ var writefile = {
         // use 0x02 | 0x10 to open file for appending.
         foStream.init(file, 0x02 | 0x08, 0666, 0); 
         // write, create, truncate
-        // In a c file operation, we have no need to set file mode with or operation,
-        // directly using "r" or "w" usually.
 
         // if you are sure there will never ever be any non-ascii text in data you can 
         // also call foStream.writeData directly
         var converter = Components.classes["@mozilla.org/intl/converter-output-stream;1"].
                         createInstance(Components.interfaces.nsIConverterOutputStream);
         converter.init(foStream, output_encoding, 0, 0);
+        // TODO if output_encoding == ascii, split data by "\n" then join by "\r\n"
         converter.writeString(data);
         converter.close(); // this closes foStream
+        response = "Wrote file " + file_path;
+    } else { // File exists
+        // TODO display notification stating the file already exists
+        response = file_path + " exists! Unable to write to an existing file.";
     };
+    // TODO notify calling element of success or failure
+
+    elem.setAttribute("response", response);
+    evt.initEvent("writefile_response", true, false);
+    elem.dispatchEvent(evt);
   }
+
 };
 
 window.addEventListener("load", function() { writefile.onLoad(); }, false);
