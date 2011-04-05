@@ -4,16 +4,18 @@
     <em:id>writefile@christianwilcox.com</em:id>
     <em:type>2</em:type>
     <em:name>writefile</em:name>
-    <em:version>1.2</em:version>
+    <em:version>1.3</em:version>
     <em:creator>Christian Wilcox</em:creator>
     <em:contributor></em:contributor>
     <em:description>Listens for a "WriteFile" event from an element in a web page and writes the contents of that element to the path given in the "filename" attribute of the same element.</em:description>
+    <em:homepageURL>https://bitbucket.org/cw/firefox-extension-writefile</em:homepageURL>
     <em:aboutURL>chrome://writefile/content/about.xul</em:aboutURL>
     <em:targetApplication>
       <Description>
         <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id> <!-- Firefox -->
         <em:minVersion>4.0</em:minVersion>
         <em:maxVersion>4.2a1pre</em:maxVersion>
+        <em:updateLink>https://bitbucket.org/cw/firefox-extension-writefile/downloads/writefile.xpi</em:updateLink>
       </Description>
     </em:targetApplication>
   </Description>
