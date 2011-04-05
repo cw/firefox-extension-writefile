@@ -39,7 +39,6 @@ var writefile = {
         file.create(0, 0666);
         // 0x02 opens the file for writing only
         foStream.init(file, 0x02, 0666, 0); 
-        // TODO if output_encoding == ascii, split data by "\n" then join by "\r\n"
         converter.init(foStream, output_encoding, 0, 0);
         if (output_encoding === "ascii") {
             split_data = data.split("\n");
