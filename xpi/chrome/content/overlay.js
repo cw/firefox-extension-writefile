@@ -48,10 +48,8 @@ var writefile = {
         converter.close(); // this closes foStream
         response = "Wrote file " + file_path;
     } else { // File exists
-        // TODO display notification stating the file already exists
         response = file_path + " exists! Unable to write to an existing file.";
     };
-    // TODO notify calling element of success or failure
 
     elem.setAttribute("response", response);
     evt.initEvent("writefile_response", true, false);
