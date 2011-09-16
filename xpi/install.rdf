@@ -4,7 +4,7 @@
     <em:id>writefile@christianwilcox.com</em:id>
     <em:type>2</em:type>
     <em:name>writefile</em:name>
-    <em:version>1.5.2</em:version>
+    <em:version>1.5.3</em:version>
     <em:creator>Christian Wilcox</em:creator>
     <em:contributor></em:contributor>
     <em:description>Listens for a "WriteFile" event from an element in a web page and writes the contents of that element to the path given in the "filename" attribute of the same element. *Does not* create "filename" if it already exists.</em:description>
@@ -14,7 +14,7 @@
       <Description>
         <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id> <!-- Firefox -->
         <em:minVersion>4.0</em:minVersion>
-        <em:maxVersion>4.2a1pre</em:maxVersion>
+        <em:maxVersion>9.0</em:maxVersion>
         <em:updateLink>https://bitbucket.org/cw/firefox-extension-writefile/downloads/update.rdf</em:updateLink>
       </Description>
     </em:targetApplication>
