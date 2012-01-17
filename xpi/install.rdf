@@ -14,7 +14,7 @@
       <Description>
         <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id> <!-- Firefox -->
         <em:minVersion>4.0</em:minVersion>
-        <em:maxVersion>9.0</em:maxVersion>
+        <em:maxVersion>12.0</em:maxVersion>
         <em:updateLink>https://bitbucket.org/cw/firefox-extension-writefile/downloads/update.rdf</em:updateLink>
       </Description>
     </em:targetApplication>
